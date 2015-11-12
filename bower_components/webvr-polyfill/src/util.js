@@ -12,8 +12,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var WebVRPolyfill = require('./webvr-polyfill.js');
+var Util = window.Util || {};
 
-// Initialize a WebVRConfig just in case.
-window.WebVRConfig = window.WebVRConfig || {};
-new WebVRPolyfill();
+Util.MIN_TIMESTEP = 0.001;
+Util.MAX_TIMESTEP = 1;
+
+Util.clamp = function(value, min, max) {
+  return Math.min(Math.max(min, value), max);
+};
+
+Util.isIOS = function() {
+  return /iPad|iPhone|iPod/.test(navigator.platform);
+};
+
+// Helper method to validate the time steps of sensor timestamps.
+Util.isTimestampDeltaValid = function(timestampDeltaS) {
+  if (isNaN(timestampDeltaS)) {
+    return false;
+  }
+  if (timestampDeltaS <= Util.MIN_TIMESTEP) {
+    return false;
+  }
+  if (timestampDeltaS > Util.MAX_TIMESTEP) {
+    return false;
+  }
+  return true;
+}
+
+module.exports = Util;
