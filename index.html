@@ -182,15 +182,15 @@ spotLight.shadowCameraNear = 1;
 scene.add(spotLight);
 var count = 0.0, radius = 3;
 
-var sunMaterial = new THREE.MeshLambertMaterial({
-  color: 0xffff00,
-  shading: THREE.FlatShading
-});
-sunMaterial.emissive = new THREE.Color(0xFFA600);
-var sunGeometry= new THREE.IcosahedronGeometry(3);
-var sunsphere = new THREE.Mesh(sunGeometry, sunMaterial);
-sunsphere.scale.x = sunsphere.scale.y = sunsphere.scale.z = blenderScaleAmount;
-scene.add(sunsphere);
+// var sunMaterial = new THREE.MeshLambertMaterial({
+//   color: 0xffff00,
+//   shading: THREE.FlatShading
+// });
+// sunMaterial.emissive = new THREE.Color(0xFFA600);
+// var sunGeometry= new THREE.IcosahedronGeometry(3);
+// var sunsphere = new THREE.Mesh(sunGeometry, sunMaterial);
+// sunsphere.scale.x = sunsphere.scale.y = sunsphere.scale.z = blenderScaleAmount;
+// scene.add(sunsphere);
 
 // Add cube mesh to your three.js scene
 // scene.add(cube);
@@ -203,10 +203,10 @@ function animate(timestamp) {
   spotLight.position.z = Math.cos(count) * radius;
   count += 0.001;
 
-  sunsphere.rotation.z += 0.01;
-  sunsphere.position.x = spotLight.position.x;
-  sunsphere.position.y = spotLight.position.y;
-  sunsphere.position.z = spotLight.position.z;
+  // sunsphere.rotation.z += 0.01;
+  // sunsphere.position.x = spotLight.position.x;
+  // sunsphere.position.y = spotLight.position.y;
+  // sunsphere.position.z = spotLight.position.z;
   // Update VR headset position and apply to camera.
   controls.update();
 
