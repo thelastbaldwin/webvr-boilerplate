@@ -83,8 +83,8 @@ var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(0x2EA3C9);
 renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFShadowMap;
-renderer.shadowMapSoft = true;
+// renderer.shadowMap.type = THREE.PCFShadowMap;
+// renderer.shadowMapSoft = true;
 
 // Append the canvas element created by the renderer to document body element.
 document.body.appendChild(renderer.domElement);
@@ -146,14 +146,14 @@ function addModel(geometry, materials){
   for(var i = 0; i < materials.length; i++){
     //can modify the json to do this for me
     materials[i].shading = THREE.FlatShading;
-    // materials[i].castShadow = true;
-    // materials[i].receiveShadow = true;
-    // materials[i].needsUpdate = true;
+    materials[i].castShadow = true;
+    materials[i].receiveShadow = true;
+    materials[i].needsUpdate = true;
   }
   var model = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
   model.traverse(function(child){
     if(child instanceof THREE.Mesh){
-      console.log(geometry);
+      // console.log(geometry);
       child.castShadow = true;
       child.receiveShadow = true;
     }
@@ -175,7 +175,7 @@ spotLight.position.set(0, 2, 0);
 // spotLight.intensity = 1;
 spotLight.castShadow = true;
 spotLight.shadowCameraNear = 1;
-spotLight.shadowCameraFar = 50;
+// spotLight.shadowCameraFar = 100;
 // spotLight.shadowMapWidth = 4096;
 // spotLight.shadowMapHeight = 4096;
 // spotLight.shadowCameraVisible = true;
