@@ -132,9 +132,6 @@ function addModel(geometry, materials){
   scene.add(model);
 }
 
-// Position cube mesh
-cube.position.z = -1;
-
 // let there be light
 var ambientLight = new THREE.AmbientLight(0x888888);
 scene.add(ambientLight);
@@ -151,31 +148,28 @@ spotLight.shadowCameraNear = 1;
 scene.add(spotLight);
 var count = 0.0, radius = 3;
 
-// var sunMaterial = new THREE.MeshLambertMaterial({
-//   color: 0xffff00,
-//   shading: THREE.FlatShading
-// });
-// sunMaterial.emissive = new THREE.Color(0xFFA600);
-// var sunGeometry= new THREE.IcosahedronGeometry(3);
-// var sunsphere = new THREE.Mesh(sunGeometry, sunMaterial);
-// sunsphere.scale.x = sunsphere.scale.y = sunsphere.scale.z = blenderScaleAmount;
-// scene.add(sunsphere);
+var sunMaterial = new THREE.MeshLambertMaterial({
+  color: 0xffff00,
+  shading: THREE.FlatShading
+});
+sunMaterial.emissive = new THREE.Color(0xFFA600);
+var sunGeometry= new THREE.IcosahedronGeometry(3);
+var sunsphere = new THREE.Mesh(sunGeometry, sunMaterial);
+sunsphere.scale.x = sunsphere.scale.y = sunsphere.scale.z = blenderScaleAmount;
+scene.add(sunsphere);
 
-// Add cube mesh to your three.js scene
-// scene.add(cube);
 // Request animation frame loop function
 function animate(timestamp) {
-  // Apply rotation to cube mesh
-  cube.rotation.y += 0.01;
+
 
   spotLight.position.x = Math.sin(count) * radius;
   spotLight.position.z = Math.cos(count) * radius;
   count += 0.005;
 
-  // sunsphere.rotation.z += 0.01;
-  // sunsphere.position.x = spotLight.position.x;
-  // sunsphere.position.y = spotLight.position.y;
-  // sunsphere.position.z = spotLight.position.z;
+  sunsphere.rotation.z += 0.01;
+  sunsphere.position.x = spotLight.position.x;
+  sunsphere.position.y = spotLight.position.y;
+  sunsphere.position.z = spotLight.position.z;
   // Update VR headset position and apply to camera.
   controls.update();
 
