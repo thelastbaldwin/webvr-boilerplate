@@ -80,11 +80,8 @@ WebVRConfig = {
 <script>
 //Setup three.js WebGL renderer
 var renderer = new THREE.WebGLRenderer({ antialias: true });
-// renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(0x2EA3C9);
-// renderer.shadowMap.enabled = true;
-// renderer.shadowMap.type = THREE.PCFShadowMap;
-// renderer.shadowMapSoft = true;
 
 // Append the canvas element created by the renderer to document body element.
 document.body.appendChild(renderer.domElement);
@@ -104,33 +101,8 @@ var effect = new THREE.VREffect(renderer);
 effect.setSize(window.innerWidth, window.innerHeight);
 
 
-// Add a repeating grid as a skybox.
-var boxWidth = 5;
-var texture = THREE.ImageUtils.loadTexture(
-  'img/box.png'
-);
-texture.wrapS = THREE.RepeatWrapping;
-texture.wrapT = THREE.RepeatWrapping;
-texture.repeat.set(boxWidth, boxWidth);
-
-var geometry = new THREE.BoxGeometry(boxWidth, boxWidth, boxWidth);
-var material = new THREE.MeshBasicMaterial({
-  map: texture,
-  color: 0x01BE00,
-  side: THREE.BackSide
-});
-
-var skybox = new THREE.Mesh(geometry, material);
-//scene.add(skybox);
-
-
 // Create a VR manager helper to enter and exit VR mode.
 var manager = new WebVRManager(renderer, effect, {hideButton: false});
-
-// Create 3D objects.
-var geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-var material = new THREE.MeshNormalMaterial();
-var cube = new THREE.Mesh(geometry, material);
 
 var blenderScaleAmount = 0.2;
 var terrain, clouds, trees;
@@ -140,7 +112,7 @@ loader.load('./asset_src/scene.json', addModel);
 
 loader.load('./asset_src/clouds.json', addModel);
 
-loader.load('./asset_src/trees.json', addModel);
+// loader.load('./asset_src/trees.json', addModel);
 
 function addModel(geometry, materials){
   for(var i = 0; i < materials.length; i++){
