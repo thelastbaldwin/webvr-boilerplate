@@ -79,8 +79,9 @@ WebVRConfig = {
 
 <script>
 //Setup three.js WebGL renderer
+// var renderer = new THREE.WebGLRenderer({ antialias: true });
 var renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setPixelRatio(window.devicePixelRatio);
+// renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(0x2EA3C9);
 
 // Append the canvas element created by the renderer to document body element.
@@ -109,10 +110,8 @@ var terrain, clouds, trees;
 
 var loader = new THREE.JSONLoader();
 loader.load('./asset_src/scene.json', addModel);
-
 loader.load('./asset_src/clouds.json', addModel);
-
-// loader.load('./asset_src/trees.json', addModel);
+loader.load('./asset_src/trees.json', addModel);
 
 function addModel(geometry, materials){
   for(var i = 0; i < materials.length; i++){
@@ -141,10 +140,6 @@ spotLight.position.set(0, 2, 0);
 // spotLight.intensity = 1;
 spotLight.castShadow = true;
 spotLight.shadowCameraNear = 1;
-// spotLight.shadowCameraFar = 100;
-// spotLight.shadowMapWidth = 4096;
-// spotLight.shadowMapHeight = 4096;
-// spotLight.shadowCameraVisible = true;
 scene.add(spotLight);
 var count = 0.0, radius = 3;
 
@@ -160,8 +155,6 @@ scene.add(sunsphere);
 
 // Request animation frame loop function
 function animate(timestamp) {
-
-
   spotLight.position.x = Math.sin(count) * radius;
   spotLight.position.z = Math.cos(count) * radius;
   count += 0.005;
