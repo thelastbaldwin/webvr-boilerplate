@@ -90,7 +90,7 @@ document.body.appendChild(renderer.domElement);
 var scene = new THREE.Scene();
 
 // Create a three.js camera.
-var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 1000);
+var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 10);
 camera.position.set(0.05, 0, 0);
 
 // Apply VR headset positional data to camera.
