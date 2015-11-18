@@ -89,6 +89,7 @@ document.body.appendChild(renderer.domElement);
 
 // Create a three.js scene.
 var scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2( 0x2EA3C9, 2);
 
 // Create a three.js camera.
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 10);
@@ -131,7 +132,7 @@ function addModel(geometry, materials){
 }
 
 // let there be light
-var ambientLight = new THREE.AmbientLight(0x888888);
+var ambientLight = new THREE.AmbientLight(0x999999);
 scene.add(ambientLight);
 
 var spotLight = new THREE.SpotLight(0xffffff);
@@ -142,26 +143,12 @@ spotLight.shadowCameraNear = 1;
 scene.add(spotLight);
 var count = 0.0, radius = 3;
 
-var sunMaterial = new THREE.MeshLambertMaterial({
-  color: 0xffff00,
-  shading: THREE.FlatShading
-});
-sunMaterial.emissive = new THREE.Color(0xFFA600);
-var sunGeometry= new THREE.IcosahedronGeometry(3);
-var sunsphere = new THREE.Mesh(sunGeometry, sunMaterial);
-sunsphere.scale.x = sunsphere.scale.y = sunsphere.scale.z = blenderScaleAmount;
-scene.add(sunsphere);
-
 // Request animation frame loop function
 function animate(timestamp) {
   spotLight.position.x = Math.sin(count) * radius;
   spotLight.position.z = Math.cos(count) * radius;
   count += 0.005;
 
-  sunsphere.rotation.z += 0.01;
-  sunsphere.position.x = spotLight.position.x;
-  sunsphere.position.y = spotLight.position.y;
-  sunsphere.position.z = spotLight.position.z;
   // Update VR headset position and apply to camera.
   controls.update();
 
