@@ -120,12 +120,6 @@ function addModel(geometry, materials){
     materials[i].shading = THREE.FlatShading;
   }
   var model = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
-  model.traverse(function(child){
-    if(child instanceof THREE.Mesh){
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  })
   model.scale.x = model.scale.y = model.scale.z = blenderScaleAmount;
   model.position.set(0, -0.04, 0);
   scene.add(model);
@@ -137,9 +131,6 @@ scene.add(ambientLight);
 
 var spotLight = new THREE.SpotLight(0xffffff);
 spotLight.position.set(0, 2, 0);
-// spotLight.intensity = 1;
-// spotLight.castShadow = true;
-spotLight.shadowCameraNear = 1;
 scene.add(spotLight);
 var count = 0.0, radius = 3;
 
