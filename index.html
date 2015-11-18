@@ -79,6 +79,7 @@ WebVRConfig = {
 
 
 <script>
+'use strict';
 var stats = new Stats();
 stats.domElement.style.position = 'absolute';
 stats.domElement.style.left = '0px';
@@ -117,13 +118,12 @@ var terrain, clouds, trees;
 
 var loader = new THREE.JSONLoader();
 loader.load('./asset_src/scene.json', addModel);
-// loader.load('./asset_src/clouds.json', addModel);
-// loader.load('./asset_src/trees.json', addModel);
+loader.load('./asset_src/clouds.json', addModel);
+loader.load('./asset_src/trees.json', addModel);
 
 function addModel(geometry, materials){
   for(var i = 0; i < materials.length; i++){
     //can modify the json to do this for me
-    console.log(materials[i], geometry);
     materials[i].shading = THREE.FlatShading;
   }
   var model = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));

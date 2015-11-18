@@ -17,6 +17,7 @@
     "materials": [{
         "wireframe": false,
         "visible": true,
+        "colorSpecular": [0.25,0.25,0.25],
         "DbgName": "rock",
         "DbgColor": 238,
         "colorAmbient": [0.169532,0.015991,0.100008],
@@ -24,14 +25,16 @@
         "opacity": 1,
         "depthTest": true,
         "colorDiffuse": [0.169532,0.015991,0.100008],
+        "specularCoef": 50,
         "transparent": false,
         "depthWrite": true,
         "DbgIndex": 3,
         "colorEmissive": [0,0,0],
-        "shading": "lambert"
+        "shading": "phong"
     },{
         "wireframe": false,
         "visible": true,
+        "colorSpecular": [0.05,0.05,0.05],
         "DbgName": "ground",
         "DbgColor": 60928,
         "colorAmbient": [0.559604,0.465305,0.166222],
@@ -39,14 +42,16 @@
         "opacity": 1,
         "depthTest": true,
         "colorDiffuse": [0.559604,0.465305,0.166222],
+        "specularCoef": 50,
         "transparent": false,
         "depthWrite": true,
         "DbgIndex": 2,
         "colorEmissive": [0,0,0],
-        "shading": "lambert"
+        "shading": "phong"
     },{
         "wireframe": false,
         "visible": true,
+        "colorSpecular": [0.25,0.25,0.25],
         "DbgName": "grass",
         "DbgColor": 15597568,
         "colorAmbient": [0.08516,0.246197,0],
@@ -54,11 +59,12 @@
         "opacity": 1,
         "depthTest": true,
         "colorDiffuse": [0.08516,0.246197,0],
+        "specularCoef": 50,
         "transparent": false,
         "depthWrite": true,
         "DbgIndex": 1,
         "colorEmissive": [0,0,0],
-        "shading": "lambert"
+        "shading": "phong"
     },{
         "wireframe": false,
         "visible": true,
