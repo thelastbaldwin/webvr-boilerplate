@@ -124,6 +124,7 @@ loader.load('./asset_src/trees.json', addModel);
 function addModel(geometry, materials){
   for(var i = 0; i < materials.length; i++){
     //can modify the json to do this for me
+    console.log(materials[i]);
     materials[i].shading = THREE.FlatShading;
   }
   var model = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
