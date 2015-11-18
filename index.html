@@ -146,9 +146,6 @@ function addModel(geometry, materials){
   for(var i = 0; i < materials.length; i++){
     //can modify the json to do this for me
     materials[i].shading = THREE.FlatShading;
-    // materials[i].castShadow = true;
-    // materials[i].receiveShadow = true;
-    // materials[i].needsUpdate = true;
   }
   var model = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
   model.traverse(function(child){
@@ -172,13 +169,6 @@ scene.add(ambientLight);
 
 var spotLight = new THREE.SpotLight(0xffffff);
 spotLight.position.set(0, 2, 0);
-// spotLight.intensity = 1;
-spotLight.castShadow = true;
-spotLight.shadowCameraNear = 1;
-spotLight.shadowCameraFar = 50;
-// spotLight.shadowMapWidth = 4096;
-// spotLight.shadowMapHeight = 4096;
-// spotLight.shadowCameraVisible = true;
 scene.add(spotLight);
 var count = 0.0, radius = 3;
 
