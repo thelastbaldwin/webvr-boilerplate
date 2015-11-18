@@ -51,6 +51,7 @@ WebVRConfig = {
 };
 </script>
 
+<script src="bower_components/stats.js/build/stats.min.js"></script>
 <!--
   three.js 3d library
   -->
@@ -78,6 +79,12 @@ WebVRConfig = {
 
 
 <script>
+var stats = new Stats();
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.left = '0px';
+stats.domElement.style.top = '0px';
+document.body.appendChild( stats.domElement );
+
 //Setup three.js WebGL renderer
 // var renderer = new THREE.WebGLRenderer({ antialias: true });
 var renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -136,6 +143,7 @@ var count = 0.0, radius = 3;
 
 // Request animation frame loop function
 function animate(timestamp) {
+   stats.begin();
   spotLight.position.x = Math.sin(count) * radius;
   spotLight.position.z = Math.cos(count) * radius;
   count += 0.005;
@@ -145,6 +153,8 @@ function animate(timestamp) {
 
   // Render the scene through the manager.
   manager.render(scene, camera, timestamp);
+
+    stats.end();
 
   requestAnimationFrame(animate);
 }
