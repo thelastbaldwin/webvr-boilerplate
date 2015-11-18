@@ -56,6 +56,8 @@ WebVRConfig = {
   three.js 3d library
   -->
 <script src="bower_components/threejs/build/three.js"></script>
+<script src="bower_components/threejs/examples/js/loaders/MTLLoader.js"></script>
+<script src="bower_components/threejs/examples/js/loaders/OBJMTLLoader.js"></script>
 
 <!--
   VRControls.js acquires positional information from connected VR devices and applies the transformations to a three.js camera object.
@@ -116,16 +118,38 @@ var manager = new WebVRManager(renderer, effect, {hideButton: false});
 var blenderScaleAmount = 0.2;
 var terrain, clouds, trees;
 
-var loader = new THREE.JSONLoader();
-loader.load('./asset_src/scene.json', addModel);
-loader.load('./asset_src/clouds.json', addModel);
-loader.load('./asset_src/trees.json', addModel);
+var loadingManager = new THREE.LoadingManager();
+var loader = new THREE.OBJMTLLoader(loadingManager);
+// loader.addEventListener( 'load', function ( event ) {
+//     var object = event.content;
+//     object.traverse( function ( child ) {
+//         if ( child instanceof THREE.Mesh ) {
+//             child.material = material;
+//         }
+//     } );
+//     scene.add( object );
+// });
+
+loader.load('./asset_src/scene.obj', './asset_src/scene.mtl', function(object){
+  // console.log(object);
+  // object.traverse( function ( child ) {
+  //       if ( child instanceof THREE.Mesh ) {
+  //           child.material = material;
+  //       }
+  //   } );
+  object.position.set(0, -0.04, 0);
+  object.scale.x  = object.scale.y = object.scale.z = blenderScaleAmount;
+  scene.add(object);
+});
+// loader.load('./asset_src/clouds.json', addModel);
+// loader.load('./asset_src/trees.json', addModel);
 
 function addModel(geometry, materials){
-  for(var i = 0; i < materials.length; i++){
-    //can modify the json to do this for me
-    materials[i].shading = THREE.FlatShading;
-  }
+  console.log(geometry);
+  // for(var i = 0; i < materials.length; i++){
+  //   //can modify the json to do this for me
+  //   materials[i].shading = THREE.FlatShading;
+  // }
   var model = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
   model.scale.x = model.scale.y = model.scale.z = blenderScaleAmount;
   model.position.set(0, -0.04, 0);
