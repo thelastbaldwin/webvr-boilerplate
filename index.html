@@ -86,9 +86,8 @@ stats.domElement.style.top = '0px';
 document.body.appendChild( stats.domElement );
 
 //Setup three.js WebGL renderer
-// var renderer = new THREE.WebGLRenderer({ antialias: true });
-var renderer = new THREE.WebGLRenderer({ antialias: false });
-// renderer.setPixelRatio(window.devicePixelRatio);
+var renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(0x2EA3C9);
 
 // Append the canvas element created by the renderer to document body element.
@@ -96,7 +95,7 @@ document.body.appendChild(renderer.domElement);
 
 // Create a three.js scene.
 var scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2( 0x2EA3C9, 2);
+scene.fog = new THREE.FogExp2( 0x2EA3C9, 1);
 
 // Create a three.js camera.
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.01, 10);
@@ -118,13 +117,13 @@ var terrain, clouds, trees;
 
 var loader = new THREE.JSONLoader();
 loader.load('./asset_src/scene.json', addModel);
-loader.load('./asset_src/clouds.json', addModel);
-loader.load('./asset_src/trees.json', addModel);
+// loader.load('./asset_src/clouds.json', addModel);
+// loader.load('./asset_src/trees.json', addModel);
 
 function addModel(geometry, materials){
   for(var i = 0; i < materials.length; i++){
     //can modify the json to do this for me
-    console.log(materials[i]);
+    console.log(materials[i], geometry);
     materials[i].shading = THREE.FlatShading;
   }
   var model = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
