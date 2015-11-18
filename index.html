@@ -81,7 +81,7 @@ WebVRConfig = {
 //Setup three.js WebGL renderer
 // var renderer = new THREE.WebGLRenderer({ antialias: true });
 var renderer = new THREE.WebGLRenderer({ antialias: true });
-// renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(0x2EA3C9);
 
 // Append the canvas element created by the renderer to document body element.
@@ -121,7 +121,6 @@ function addModel(geometry, materials){
   var model = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
   model.traverse(function(child){
     if(child instanceof THREE.Mesh){
-      // console.log(geometry);
       child.castShadow = true;
       child.receiveShadow = true;
     }
@@ -138,7 +137,7 @@ scene.add(ambientLight);
 var spotLight = new THREE.SpotLight(0xffffff);
 spotLight.position.set(0, 2, 0);
 // spotLight.intensity = 1;
-spotLight.castShadow = true;
+// spotLight.castShadow = true;
 spotLight.shadowCameraNear = 1;
 scene.add(spotLight);
 var count = 0.0, radius = 3;
