@@ -91,7 +91,7 @@ document.body.appendChild( stats.domElement );
 //Setup three.js WebGL renderer
 var renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setClearColor(0x2EA3C9);
+renderer.setClearColor(0x112D40);
 
 // Append the canvas element created by the renderer to document body element.
 document.body.appendChild(renderer.domElement);
@@ -157,20 +157,35 @@ function addModel(geometry, materials){
 }
 
 // let there be light
-var ambientLight = new THREE.AmbientLight(0x999999);
-scene.add(ambientLight);
+// var ambientLight = new THREE.AmbientLight(0x999999);
+// scene.add(ambientLight);
 
-var spotLight = new THREE.SpotLight(0xffffff);
-spotLight.position.set(0, 2, 0);
-scene.add(spotLight);
+var spotlights = [];
+spotlights[0] = new THREE.SpotLight(0xffffff);
+spotlights[0].position.set(0, 2, 0);
+scene.add(spotlights[0]);
+
+spotlights[1] = new THREE.SpotLight(0xF2F1B8);
+spotlights[1].position.set(0, 2, 0);
+scene.add(spotlights[1]);
+
+spotlights[2] = new THREE.SpotLight(0x7173F5);
+spotlights[2].position.set(0, 2, 0);
+scene.add(spotlights[2]);
+
+spotlights[3] = new THREE.SpotLight(0xE05A5A);
+spotlights[3].position.set(0, 2, 0);
+scene.add(spotlights[3]);
 var count = 0.0, radius = 3;
 
 // Request animation frame loop function
 function animate(timestamp) {
    stats.begin();
-  spotLight.position.x = Math.sin(count) * radius;
-  spotLight.position.z = Math.cos(count) * radius;
-  count += 0.005;
+   for(var i = 0; i < spotlights.length; i++){
+      spotlights[i].position.x = Math.sin(count * i * (Math.PI * 2)/spotlights.length) * radius;
+      spotlights[i].position.z = Math.cos(count * i * (Math.PI * 2)/spotlights.length) * radius;
+   }
+  count += 0.003;
 
   // Update VR headset position and apply to camera.
   controls.update();
